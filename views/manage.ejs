@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WMS 자재 관리</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/manage.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-cubes"></i> WMS 자재 관리 시스템
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/"><i class="fas fa-home"></i> 메인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/manage"><i class="fas fa-cogs"></i> 자재 관리</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title mb-0"><i class="fas fa-edit"></i> 자재 관리</h3>
+        <button id="addMaterialBtn" class="btn btn-primary">
+          <i class="fas fa-plus"></i> 신규 자재 추가
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>자재코드</th>
+                <th>제조사</th>
+                <th>수량</th>
+                <th>위치1</th>
+                <th>위치2</th>
+                <th>상태</th>
+                <th>날짜</th>
+                <th>관리</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (materials && materials.length > 0) { %>
+                <% materials.forEach(item => { %>
+                  <tr data-id="<%= item.id %>">
+                    <td><%= item.id %></td>
+                    <td><%= item.material %></td>
+                    <td><%= item.manufacturer %></td>
+                    <td><%= item.quantity %></td>
+                    <td><%= item.location1 || '' %></td>
+                    <td><%= item.location2 || '' %></td>
+                    <td><%= item.status || '' %></td>
+                    <td><%= item.date || '' %></td>
+                    <td>
+                      <button class="btn btn-sm btn-warning btn-edit" data-id="<%= item.id %>">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger btn-delete" data-id="<%= item.id %>">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr>
+                  <td colspan="9" class="text-center">등록된 자재가 없습니다.</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 자재 추가/수정 모달 -->
+  <div class="modal fade" id="materialModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle">자재 추가</h5>
+          <button type="button" class="btn-close modal-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="materialForm">
+            <input type="hidden" id="materialId">
+            
+            <div class="mb-3">
+              <label for="material" class="form-label">자재코드 *</label>
+              <input type="text" class="form-control" id="material" name="material" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="manufacturer" class="form-label">제조사 *</label>
+              <input type="text" class="form-control" id="manufacturer" name="manufacturer" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="quantity" class="form-label">수량 *</label>
+              <input type="number" class="form-control" id="quantity" name="quantity" min="0" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="location1" class="form-label">위치1</label>
+              <select class="form-select" id="location1" name="location1">
+                <option value="">선택하세요</option>
+                <option value="렉">렉</option>
+                <option value="검사">검사</option>
+                <option value="보관">보관</option>
+                <option value="완료">완료</option>
+                <option value="불량">불량</option>
+                <option value="예정">예정</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
+            
+            <div class="mb-3">
+              <label for="location2" class="form-label">위치2</label>
+              <input type="text" class="form-control" id="location2" name="location2">
+            </div>
+            
+            <div class="mb-3">
+              <label for="status" class="form-label">상태</label>
+              <select class="form-select" id="status" name="status">
+                <option value="">선택하세요</option>
+                <option value="대기중">대기중</option>
+                <option value="진행중">진행중</option>
+                <option value="완료">완료</option>
+              </select>
+            </div>
+            
+            <div class="mb-3">
+              <label for="date" class="form-label">날짜</label>
+              <input type="date" class="form-control" id="date" name="date">
+            </div>
+            
+            <div class="text-end">
+              <button type="button" class="btn btn-secondary btn-cancel" data-bs-dismiss="modal">취소</button>
+              <button type="submit" class="btn btn-primary btn-submit">저장</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 삭제 확인 모달 -->
+  <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">자재 삭제</h5>
+          <button type="button" class="btn-close modal-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>정말 이 자재를 삭제하시겠습니까?</p>
+          <input type="hidden" id="deleteId">
+          <div class="text-end">
+            <button type="button" class="btn btn-secondary btn-cancel" data-bs-dismiss="modal">취소</button>
+            <button type="button" id="confirmDelete" class="btn btn-danger">삭제</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/manage.js"></script>
+</body>
+</html> 

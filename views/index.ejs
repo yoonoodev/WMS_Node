@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WMS 자재 관리 시스템</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-cubes"></i> WMS 자재 관리 시스템
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/"><i class="fas fa-home"></i> 메인</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/manage"><i class="fas fa-cogs"></i> 자재 관리</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rework"><i class="fas fa-tools"></i> 재작업</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/regrind"><i class="fas fa-cut"></i> 재연마</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container mt-4">
+    <div class="card mb-4">
+      <div class="card-header dashboard-header">
+        <h2 class="card-title mb-0">자재 현황 대시보드</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="text-primary mb-3">
+                  <i class="fas fa-boxes fa-2x"></i>
+                </div>
+                <h5 class="card-title">총 자재 종류</h5>
+                <p class="card-text display-6"><%= Number(stats.materialCount).toLocaleString('ko-KR') %></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="text-danger mb-3">
+                  <i class="fas fa-clipboard-check fa-2x"></i>
+                </div>
+                <h5 class="card-title">총 회사 수</h5>
+                <p class="card-text display-6"><%= Number(stats.manufacturerCount).toLocaleString('ko-KR') %></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="text-success mb-3">
+                  <i class="fas fa-layer-group fa-2x"></i>
+                </div>
+                <h5 class="card-title">총 수량</h5>
+                <p class="card-text display-6"><%= Number(stats.totalQuantity).toLocaleString('ko-KR') %></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="card-body text-center">
+                <div class="text-purple mb-3">
+                  <i class="fas fa-database fa-2x"></i>
+                </div>
+                <h5 class="card-title">총 항목 수</h5>
+                <p class="card-text display-6"><%= Number(stats.totalRecords).toLocaleString('ko-KR') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header material-header">
+        <h3 class="card-title mb-0"><i class="fas fa-table"></i> 자재 그룹화 데이터 (Material, 제조사별)</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th data-sort="material" class="sortable">Material</th>
+                <th data-sort="manufacturer" class="sortable">제조사</th>
+                <th data-sort="total_quantity" class="sortable">총수량</th>
+                <th data-sort="good_quantity" class="sortable">양품</th>
+                <th data-sort="rack" class="sortable">렉</th>
+                <th data-sort="inspection" class="sortable">검사</th>
+                <th data-sort="storage" class="sortable">보관</th>
+                <th data-sort="completed" class="sortable">완료</th>
+                <th data-sort="defective" class="sortable">불량</th>
+                <th data-sort="scheduled" class="sortable">예정</th>
+                <th data-sort="etc_qty" class="sortable">기타</th>
+                <th data-sort="maker" class="sortable">Maker</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (materials && materials.length > 0) { %>
+                <% materials.forEach(material => { %>
+                  <tr>
+                    <td><%= material.material || '' %></td>
+                    <td><%= material.manufacturer || '' %></td>
+                    <td class="<%= Number(material.total_quantity || 0) > 0 ? 'quantity-cell' : '' %>"><%= Number(material.total_quantity || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.good_quantity || 0) > 0 ? 'quantity-cell' : '' %>"><%= Number(material.good_quantity || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.rack || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.rack || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.inspection || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.inspection || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.storage || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.storage || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.completed || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.completed || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.defective || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.defective || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.scheduled || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.scheduled || 0).toLocaleString('ko-KR') %></td>
+                    <td class="<%= Number(material.etc_qty || 0) > 0 ? 'status-cell' : '' %>"><%= Number(material.etc_qty || 0).toLocaleString('ko-KR') %></td>
+                    <td><%= material.maker || '' %></td>
+                  </tr>
+                <% }); %>
+              <% } else { %>
+                <tr>
+                  <td colspan="12" class="text-center">데이터가 없습니다.</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+</html> 
