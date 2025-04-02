@@ -1,0 +1,468 @@
+/* 전체 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f0f2f5;
+  color: #000000;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* 헤더 */
+.main-header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-header h1 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.main-header i {
+  margin-right: 0.5rem;
+}
+
+/* 대시보드 */
+.dashboard {
+  margin: 2rem 0;
+}
+
+.dashboard h2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.stats-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.stat-icon.blue {
+  background-color: #3498db;
+}
+
+.stat-icon.red {
+  background-color: #e74c3c;
+}
+
+.stat-icon.green {
+  background-color: #2ecc71;
+}
+
+.stat-icon.purple {
+  background-color: #9b59b6;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.2rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 데이터 섹션 */
+.data-section {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
+  color: white;
+  border-radius: 8px 8px 0 0;
+  position: static;
+  z-index: 20;
+}
+
+/* 대시보드 섹션 헤더 */
+.section-header.dashboard-header {
+  background-color: #2c3e50; /* 진한 네이비 */
+}
+
+/* 자재 그룹화 데이터 섹션 헤더 */
+.section-header.material-header {
+  background-color: #34495e; /* 약간 밝은 네이비 */
+}
+
+/* 자재 현황 섹션 헤더 */
+.section-header.status-header {
+  background-color: #2980b9; /* 블루 */
+}
+
+/* 자재 현황 상세 섹션 헤더 */
+.section-header.detail-header {
+  background-color: #16a085; /* 청록색 */
+}
+
+/* 재작업 페이지 카드 헤더 스타일 */
+.section-header.rework-wait-header {
+  background-color: #e74c3c; /* 빨간색 */
+}
+
+.section-header.rework-out-header {
+  background-color: #f39c12; /* 주황색 */
+}
+
+.section-header.rework-in-header {
+  background-color: #27ae60; /* 초록색 */
+}
+
+.section-header.rework-completed-header {
+  background-color: #3498db; /* 파란색 */
+}
+
+/* 재연마 페이지 카드 헤더 스타일 */
+.section-header.regrind-wait-header {
+  background-color: #e74c3c; /* 빨간색 */
+}
+
+.section-header.regrind-out-header {
+  background-color: #f39c12; /* 주황색 */
+}
+
+.section-header.regrind-in-header {
+  background-color: #27ae60; /* 초록색 */
+}
+
+.section-header.regrind-completed-header {
+  background-color: #3498db; /* 파란색 */
+}
+
+.section-header.filter-header {
+  background-color: #2c3e50; /* 진한 네이비 */
+}
+
+.section-header h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.section-header i {
+  margin-right: 0.5rem;
+}
+
+/* 카드 스타일 */
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 1rem;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 1rem 1.25rem;
+}
+
+/* 대시보드 카드 헤더 */
+.card-header:first-child {
+  background-color: #2c3e50;
+  color: white;
+}
+
+/* 자재 그룹화 데이터 카드 헤더 */
+.card-header:last-child {
+  background-color: #34495e;
+  color: white;
+}
+
+.card-title {
+  margin-bottom: 0;
+  color: inherit;
+  font-weight: 500;
+}
+
+.card-title i {
+  margin-right: 0.5rem;
+}
+
+/* 통계 카드 스타일 */
+.card .fa-2x {
+  font-size: 2.5em;
+}
+
+.text-primary {
+  color: #2c3e50 !important;
+}
+
+.text-danger {
+  color: #c0392b !important;
+}
+
+.text-success {
+  color: #27ae60 !important;
+}
+
+.text-purple {
+  color: #8e44ad !important;
+}
+
+/* 테이블 스타일 */
+.table {
+  margin-bottom: 0;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.table th {
+  background-color: #2c3e50;
+  color: white;
+  border-bottom: 2px solid #dee2e6;
+  padding: 0.8rem 0.5rem;
+  font-weight: 600;
+  text-transform: none;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 0.8rem 0.5rem;
+  color: #000000;
+}
+
+/* 정렬 가능한 컬럼 헤더 스타일 */
+th.sortable {
+  cursor: pointer;
+  position: relative;
+  padding-right: 25px;
+  transition: background-color 0.2s ease;
+}
+
+th.sortable:hover {
+  background-color: #34495e !important;
+}
+
+th.sortable::before {
+  content: '↕';
+  position: absolute;
+  right: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8em;
+  transition: color 0.2s ease;
+}
+
+th.sortable:hover::before {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+th.sortable.sort-asc::before {
+  content: '↑';
+  color: #fff;
+}
+
+th.sortable.sort-desc::before {
+  content: '↓';
+  color: #fff;
+}
+
+/* 테이블 행 스타일 */
+.table tbody tr {
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+  background-color: #e9f5fe;
+}
+
+/* 수량 셀 스타일 */
+.quantity-cell {
+  font-weight: bold;
+  color: #27ae60;
+  background-color: rgba(39, 174, 96, 0.15);
+  border-radius: 4px;
+}
+
+/* 양품 셀의 배경색 변경 */
+.table td.quantity-cell:nth-child(4) {
+  background-color: rgba(26, 188, 156, 0.15); /* 양품 - 청록색 */
+  font-weight: 600;
+}
+
+/* 상태 셀 스타일 */
+.status-cell {
+  font-weight: bold;
+  color: #2980b9;
+  background-color: rgba(41, 128, 185, 0.15);
+  border-radius: 4px;
+}
+
+/* 각 상태 셀의 배경색 */
+.table td.status-cell:nth-child(5) {
+  background-color: rgba(52, 152, 219, 0.15); /* 렉 - 스틸블루 */
+}
+
+.table td.status-cell:nth-child(6) {
+  background-color: rgba(155, 89, 182, 0.15); /* 검사 - 퍼플 */
+}
+
+.table td.status-cell:nth-child(7) {
+  background-color: rgba(41, 128, 185, 0.15); /* 보관 - 블루 */
+}
+
+.table td.status-cell:nth-child(8) {
+  background-color: rgba(46, 204, 113, 0.15); /* 완료 - 그린 */
+}
+
+.table td.status-cell:nth-child(9) {
+  background-color: rgba(231, 76, 60, 0.15); /* 불량 - 레드 */
+}
+
+.table td.status-cell:nth-child(10) {
+  background-color: rgba(243, 156, 18, 0.15); /* 예정 - 오렌지 */
+}
+
+.table td.status-cell:nth-child(11) {
+  background-color: rgba(127, 140, 141, 0.15); /* 기타 - 그레이 */
+}
+
+/* 반응형 테이블 */
+.table-responsive {
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+/* 버튼 스타일 */
+.btn {
+  cursor: pointer;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* 모달 스타일 */
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+/* 폼 스타일 */
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+  .stats-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    flex-basis: calc(50% - 1rem);
+    min-width: 250px;
+  }
+  
+  .table {
+    font-size: 0.85rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.7rem 0.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 992px) {
+  .table th:nth-child(1), .table td:nth-child(1) { width: 14%; }
+  .table th:nth-child(2), .table td:nth-child(2) { width: 12%; }
+  .table th:nth-child(3), .table td:nth-child(3) { width: 8%; }
+  .table th:nth-child(4), .table td:nth-child(4) { width: 8%; }
+  .table th:nth-child(5), .table td:nth-child(5) { width: 6%; }
+  .table th:nth-child(6), .table td:nth-child(6) { width: 6%; }
+  .table th:nth-child(7), .table td:nth-child(7) { width: 6%; }
+  .table th:nth-child(8), .table td:nth-child(8) { width: 6%; }
+  .table th:nth-child(9), .table td:nth-child(9) { width: 6%; }
+  .table th:nth-child(10), .table td:nth-child(10) { width: 6%; }
+  .table th:nth-child(11), .table td:nth-child(11) { width: 6%; }
+  .table th:nth-child(12), .table td:nth-child(12) { width: 16%; }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .stats-container {
+    flex-direction: column;
+  }
+  
+  .stat-card {
+    flex-basis: 100%;
+  }
+} 
