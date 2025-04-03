@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const path = require('path');
 const regrindRouter = require('./routes/regrind');
+const reworkRouter = require('./routes/rework');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 라우터 등록
 app.use('/regrind', regrindRouter);
+app.use('/rework', reworkRouter);
 
 // MySQL 연결 풀 생성
 const pool = mysql.createPool({
